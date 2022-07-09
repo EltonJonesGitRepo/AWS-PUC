@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AWS.PUC.Modelos\AWS.PUC.Modelos.csproj" />
+    <ProjectReference Include="..\AWS.PUC.Repositorio\AWS.PUC.Repositorio.csproj" />
+  </ItemGroup>
+
+</Project>
