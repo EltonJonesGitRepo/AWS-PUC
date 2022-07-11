@@ -1,5 +1,4 @@
-﻿using AWS.PUC.Modelos;
-using AWS.PUC.Servicos;
+﻿using AWS.PUC.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace AWS.PUC.API.Controllers
 {
-    [ApiController]    
-    public class TimesController : ControllerBase
-    {        
-        private readonly ITimeServico _timeServico;
-        
-        public TimesController(ITimeServico timeServico)
-        {            
-            _timeServico = timeServico;
+    [ApiController]
+    public class PartidasController : ControllerBase
+    {
+        private readonly IPartidaServico _partidaServico;
+
+        public PartidasController(IPartidaServico partidaServico)
+        {
+            _partidaServico = partidaServico;
         }
 
         [HttpGet]
-        [Route("v1/times")]
+        [Route("v1/partidas")]
         public async Task<IActionResult> Get()
         {
             try
             {
-                return Ok(await _timeServico.Listar());
+                return Ok(await _partidaServico.Listar());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -34,12 +33,12 @@ namespace AWS.PUC.API.Controllers
 
 
         [HttpGet]
-        [Route("v1/times/{id}")]
+        [Route("v1/partidas/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             try
             {
-                return Ok(await _timeServico.Obter(id));
+                return Ok(await _partidaServico.Obter(id));
             }
             catch (Exception e)
             {

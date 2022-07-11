@@ -26,6 +26,8 @@ namespace AWS.PUC.Repositorio
             base.OnModelCreating(modelBuilder);
         }
 
+        public DbSet<Torneio> Torneios { get; set; }
         public DbSet<Time> Times { get; set; }
+        public DbSet<Partida> Partidas { get; set; }
     }
 }
