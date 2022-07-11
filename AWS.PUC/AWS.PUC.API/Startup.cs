@@ -51,6 +51,8 @@ namespace AWS.PUC.API
                            }));
 
             services.AddScoped<ITimeServico, TimeServico>();
+            services.AddScoped<IPartidaServico, PartidaServico>();
+            services.AddScoped<ITorneioServico, TorneioServico>();
             
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
