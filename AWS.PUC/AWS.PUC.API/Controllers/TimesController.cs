@@ -46,5 +46,50 @@ namespace AWS.PUC.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("v1/times")]
+        public async Task<IActionResult> Post([FromBody] Time time)
+        {
+            try
+            {
+                await _timeServico.Cadastrar(time);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("v1/times")]
+        public async Task<IActionResult> Put([FromBody] Time time)
+        {
+            try
+            {
+                await _timeServico.Editar(time);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("v1/times/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await _timeServico.Excluir(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

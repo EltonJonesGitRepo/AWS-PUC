@@ -16,32 +16,24 @@ namespace AWS.PUC.Servicos
         {
             _timeRepositorio = timeRepositorio;
         }
-        public Task Cadastrar(Time entidade)
+        public async Task Cadastrar(Time entidade)
         {
-            throw new NotImplementedException();
+            await _timeRepositorio.AddAsync(entidade);
         }
 
         public async Task Editar(Time entidade)
         {
-            throw new NotImplementedException();
+            await _timeRepositorio.UpdateAsync(entidade);
         }
 
         public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            var time = await Obter(id);
+            await _timeRepositorio.DeleteAsync(time);
         }
 
         public async Task<ICollection<Time>> Listar()
         {
-            ////Todo mock inicial: Código definitivo a Iplementar 
-            //List<Time> times = new List<Time>();
-
-            //times.Add(new Time(Guid.Parse("d7a5edda-0808-47a9-ad22-38b08cc6d662"), "Cruzeiro", "Belo Horizonte-MG"));
-            //times.Add(new Time(Guid.Parse("78e4bd84-8c0c-4492-a927-ce12b70a7cf8"), "Atletico", "Belo Horizonte-MG"));
-            //times.Add(new Time(Guid.Parse("3fc9cb4e-0bbf-4011-a6e3-df5c71e46056"), "America", "Belo Horizonte-MG"));
-
-            //return times;
-
             return await _timeRepositorio.GetAllAsync();
         }
 
