@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,7 +19,12 @@ namespace AWS.PUC.Modelos
         {
             Id = id;
             Nome = nome;
-            Localidade = localidade;
+            Localidade = localidade;            
+        }
+
+        public void IncluirJogador(Jogador jogador)
+        {
+            Jogadores.Add(jogador);
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,5 +36,7 @@ namespace AWS.PUC.Modelos
 
         [Column(TypeName = "VARCHAR(100)")]
         public string Localidade { get; private set; }
+
+        public virtual List<Jogador> Jogadores { get; set; } = new List<Jogador>();
     }
 }
