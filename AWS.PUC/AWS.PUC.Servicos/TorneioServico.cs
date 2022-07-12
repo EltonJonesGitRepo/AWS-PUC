@@ -17,19 +17,20 @@ namespace AWS.PUC.Servicos
             _torneioRepositorio = torneioRepositorio;
         }
 
-        public Task Cadastrar(Torneio entidade)
+        public async Task Cadastrar(Torneio entidade)
         {
-            throw new NotImplementedException();
+            await _torneioRepositorio.AddAsync(entidade);
         }
 
-        public Task Editar(Torneio entidade)
+        public async Task Editar(Torneio entidade)
         {
-            throw new NotImplementedException();
+            await _torneioRepositorio.UpdateAsync(entidade);
         }
 
-        public Task Excluir(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            var torneio = await Obter(id);
+            await _torneioRepositorio.DeleteAsync(torneio);
         }
 
         public async Task<ICollection<Torneio>> Listar()
