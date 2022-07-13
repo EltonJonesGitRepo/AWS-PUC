@@ -1,4 +1,5 @@
 ﻿using AWS.PUC.Modelos;
+using AWS.PUC.Repositorio;
 using AWS.PUC.Servicos;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,32 @@ namespace AWS.PUC.Servicos
 {
     public class PartidaServico : IPartidaServico
     {
-        public Task Cadastrar(Partida entidade)
+        private readonly IGenericRepository<Partida> _partidaRepositorio;
+
+        public PartidaServico(IGenericRepository<Partida> partidaRepositorio)
         {
-            throw new NotImplementedException();
+            _partidaRepositorio = partidaRepositorio;
         }
 
-        public Task Editar(Partida entidade)
+        public async Task Cadastrar(Partida entidade)
         {
-            throw new NotImplementedException();
+            await _partidaRepositorio.AddAsync(entidade);
         }
 
-        public Task Excluir(Guid id)
+        public async Task Editar(Partida entidade)
         {
-            throw new NotImplementedException();
+            await _partidaRepositorio.UpdateAsync(entidade);
         }
 
-        public Task<ICollection<Partida>> Listar()
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            var partida = await Obter(id);
+            await _partidaRepositorio.DeleteAsync(partida);
+        }
+
+        public async Task<ICollection<Partida>> Listar()
+        {
+            return await _partidaRepositorio.GetAllAsync();
         }
 
         public Task<Partida> Obter(Guid id)

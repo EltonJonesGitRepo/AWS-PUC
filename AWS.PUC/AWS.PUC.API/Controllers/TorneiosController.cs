@@ -1,4 +1,5 @@
-﻿using AWS.PUC.Servicos;
+﻿using AWS.PUC.Modelos;
+using AWS.PUC.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,51 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 return Ok(await _torneioServico.Obter(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("v1/torneios")]
+        public async Task<IActionResult> Post([FromBody] Torneio time)
+        {
+            try
+            {
+                await _torneioServico.Cadastrar(time);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("v1/torneios")]
+        public async Task<IActionResult> Put([FromBody] Torneio time)
+        {
+            try
+            {
+                await _torneioServico.Editar(time);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("v1/torneios/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await _torneioServico.Excluir(id);
+                return Ok();
             }
             catch (Exception e)
             {

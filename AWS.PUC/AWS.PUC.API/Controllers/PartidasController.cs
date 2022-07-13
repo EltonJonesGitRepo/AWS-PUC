@@ -1,4 +1,5 @@
-﻿using AWS.PUC.Servicos;
+﻿using AWS.PUC.Modelos;
+using AWS.PUC.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,51 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 return Ok(await _partidaServico.Obter(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("v1/partidas")]
+        public async Task<IActionResult> Post([FromBody] Partida time)
+        {
+            try
+            {
+                await _partidaServico.Cadastrar(time);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("v1/partidas")]
+        public async Task<IActionResult> Put([FromBody] Partida time)
+        {
+            try
+            {
+                await _partidaServico.Editar(time);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("v1/partidas/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await _partidaServico.Excluir(id);
+                return Ok();
             }
             catch (Exception e)
             {
