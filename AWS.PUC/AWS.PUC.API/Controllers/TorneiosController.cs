@@ -77,6 +77,42 @@ namespace AWS.PUC.API.Controllers
             }
         }
 
+
+        //
+
+
+        [HttpPost]
+        [Route("v1/torneios/{torneioId}/partida/{partidaId}")]
+        public async Task<IActionResult> AssiciarTorneioPartida(Guid torneioId, Guid partidaId)
+        {
+            try
+            {
+                await _torneioServico.AssociarTorneioPartida(torneioId,partidaId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("v1/torneios/{id}/torneio/{torneioId}/partida/{partidaId}")]
+        public async Task<IActionResult> EditarAssiciacaoTorneioPartida(Guid id, Guid torneioId, Guid partidaId)
+        {
+            try
+            {
+                await _torneioServico.EditarAssociacaoTorneioPartida(id, torneioId, partidaId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        //
+
         [HttpDelete]
         [Route("v1/torneios/{id}")]
         public async Task<IActionResult> Delete(Guid id)

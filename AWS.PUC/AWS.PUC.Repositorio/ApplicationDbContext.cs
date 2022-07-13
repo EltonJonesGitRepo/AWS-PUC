@@ -27,5 +27,6 @@ namespace AWS.PUC.Repositorio
         public DbSet<Partida> Partidas { get; set; }
         public DbSet<Jogador> Jogadores { get; set; }
         public DbSet<Transferencia> Transferencias { get; set; }
+        public DbSet<TorneioPartida> TorneiosPartidas { get; set; }
     }
 }

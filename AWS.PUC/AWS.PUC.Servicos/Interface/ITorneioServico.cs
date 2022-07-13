@@ -1,9 +1,7 @@
-﻿using System;
+﻿using AWS.PUC.Modelos;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using AWS.PUC.Modelos;
 
 namespace AWS.PUC.Servicos
 {
@@ -14,5 +12,7 @@ namespace AWS.PUC.Servicos
         Task Cadastrar(Torneio entidade);
         Task Editar(Torneio entidade);
         Task Excluir(Guid id);
+        Task AssociarTorneioPartida(Guid torneioId, Guid partidaId);
+        Task EditarAssociacaoTorneioPartida(Guid id, Guid torneioId, Guid partidaId);
     }
 }
