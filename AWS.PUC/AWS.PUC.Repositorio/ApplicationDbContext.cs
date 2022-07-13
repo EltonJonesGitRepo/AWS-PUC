@@ -1,10 +1,6 @@
 ﻿using AWS.PUC.Modelos;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AWS.PUC.Repositorio
 {
@@ -30,5 +26,6 @@ namespace AWS.PUC.Repositorio
         public DbSet<Time> Times { get; set; }
         public DbSet<Partida> Partidas { get; set; }
         public DbSet<Jogador> Jogadores { get; set; }
+        public DbSet<Transferencia> Transferencias { get; set; }
     }
 }
