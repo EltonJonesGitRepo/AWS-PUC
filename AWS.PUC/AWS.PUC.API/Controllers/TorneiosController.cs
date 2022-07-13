@@ -1,4 +1,5 @@
-﻿using AWS.PUC.Modelos;
+﻿using AWS.PUC.DTO;
+using AWS.PUC.Modelos;
 using AWS.PUC.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -78,16 +79,14 @@ namespace AWS.PUC.API.Controllers
         }
 
 
-        //
-
 
         [HttpPost]
-        [Route("v1/torneios/{torneioId}/partida/{partidaId}")]
-        public async Task<IActionResult> AssiciarTorneioPartida(Guid torneioId, Guid partidaId)
+        [Route("v1/torneios-partidas")]
+        public async Task<IActionResult> AssiciarTorneioPartida([FromBody] TorneioPartidaInputDTO torneioPartidaInputDTO)
         {
             try
             {
-                await _torneioServico.AssociarTorneioPartida(torneioId,partidaId);
+                await _torneioServico.AssociarTorneioPartida(torneioPartidaInputDTO);
                 return Ok();
             }
             catch (Exception e)
@@ -97,12 +96,12 @@ namespace AWS.PUC.API.Controllers
         }
 
         [HttpPut]
-        [Route("v1/torneios/{id}/torneio/{torneioId}/partida/{partidaId}")]
-        public async Task<IActionResult> EditarAssiciacaoTorneioPartida(Guid id, Guid torneioId, Guid partidaId)
+        [Route("v1/torneios-partidas")]
+        public async Task<IActionResult> EditarAssiciacaoTorneioPartida([FromBody] TorneioPartidaInputDTO torneioPartidaInputDTO)
         {
             try
             {
-                await _torneioServico.EditarAssociacaoTorneioPartida(id, torneioId, partidaId);
+                await _torneioServico.EditarAssociacaoTorneioPartida(torneioPartidaInputDTO);
                 return Ok();
             }
             catch (Exception e)
@@ -111,8 +110,7 @@ namespace AWS.PUC.API.Controllers
             }
         }
 
-        //
-
+ 
         [HttpDelete]
         [Route("v1/torneios/{id}")]
         public async Task<IActionResult> Delete(Guid id)

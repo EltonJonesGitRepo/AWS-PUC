@@ -1,4 +1,5 @@
-﻿using AWS.PUC.Modelos;
+﻿using AWS.PUC.DTO;
+using AWS.PUC.Modelos;
 using AWS.PUC.Repositorio;
 using System;
 using System.Collections.Generic;
@@ -42,35 +43,35 @@ namespace AWS.PUC.Servicos
         {
             return await _torneioRepositorio.GetByIdAsync(id);
         }
-        public async Task AssociarTorneioPartida(Guid torneioId, Guid partidaId)
+        public async Task AssociarTorneioPartida(TorneioPartidaInputDTO torneioPartidaInputDTO)
         {
-            var associacaoJaExistente = _torneiosPartidasRepositorio.Exist(x => x.TorneioId == torneioId && x.PartidaId == partidaId);
+            var associacaoJaExistente = _torneiosPartidasRepositorio.Exist(x => x.TorneioId == torneioPartidaInputDTO.TorneioId && x.PartidaId == torneioPartidaInputDTO.PartidaId);
 
             if (associacaoJaExistente)
             {
                 throw new Exception("Já existe a associação entre o torneio e a partida");
             }
 
-            TorneioPartida torneioPartida = new TorneioPartida(Guid.NewGuid(), torneioId, partidaId);
+            TorneioPartida torneioPartida = new TorneioPartida(Guid.NewGuid(), torneioPartidaInputDTO.TorneioId, torneioPartidaInputDTO.PartidaId);
             await _torneiosPartidasRepositorio.AddAsync(torneioPartida);
         }
-        public async Task EditarAssociacaoTorneioPartida(Guid id, Guid torneioId, Guid partidaId)
+        public async Task EditarAssociacaoTorneioPartida(TorneioPartidaInputDTO torneioPartidaInputDTO)
         {
-            TorneioPartida torneioPartida = await _torneiosPartidasRepositorio.FindAsync(x => x.Id == id);
+            TorneioPartida torneioPartida = await _torneiosPartidasRepositorio.FindAsync(x => x.Id == torneioPartidaInputDTO.Id);
 
             if (torneioPartida == null)
             {
                 throw new Exception("Registro não encontrado");
             }
 
-            TorneioPartida associacaoJaExistente = await _torneiosPartidasRepositorio.FindAsync(x => x.TorneioId == torneioId && x.PartidaId == partidaId);
+            TorneioPartida associacaoJaExistente = await _torneiosPartidasRepositorio.FindAsync(x => x.TorneioId == torneioPartidaInputDTO.TorneioId && x.PartidaId == torneioPartidaInputDTO.PartidaId);
 
-            if (associacaoJaExistente != null && associacaoJaExistente.Id != id)
+            if (associacaoJaExistente != null && associacaoJaExistente.Id != torneioPartidaInputDTO.Id)
             {
                 throw new Exception("Já existe a associação entre o torneio e a partida");
             }
 
-            torneioPartida.SetPartidaId(partidaId);
+            torneioPartida.SetPartidaId(torneioPartidaInputDTO.PartidaId);
 
             await _torneiosPartidasRepositorio.UpdateAsync(torneioPartida);
         }
