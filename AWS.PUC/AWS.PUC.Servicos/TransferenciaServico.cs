@@ -29,7 +29,7 @@ namespace AWS.PUC.Servicos
                 throw new Exception("Jogador não encotrado.");
             }
 
-            jogador.TranferirJogador(entidade.IdTimeDestino);
+            jogador.SetIdTimeDestino(entidade.IdTimeDestino);
 
             await _jogadorServico.Editar(jogador);
 
@@ -45,7 +45,7 @@ namespace AWS.PUC.Servicos
                 throw new Exception("Jogador não encotrado.");
             }
 
-            jogador.TranferirJogador(entidade.IdTimeDestino);
+            jogador.SetIdTimeDestino(entidade.IdTimeDestino);
 
             await _jogadorServico.Editar(jogador);
 

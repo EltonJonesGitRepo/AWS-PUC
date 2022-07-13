@@ -45,7 +45,7 @@ namespace AWS.PUC.Modelos
         [JsonIgnore]
         public virtual Time Time { get; set; }
 
-        public void TranferirJogador(Guid idTimeDestino)
+        public void SetIdTimeDestino(Guid idTimeDestino)
         {
             TimeId = idTimeDestino;
         }
