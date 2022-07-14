@@ -1,4 +1,5 @@
-﻿using AWS.PUC.DTO;
+﻿using AWS.PUC.COMUM.Enumeradores;
+using AWS.PUC.DTO;
 using AWS.PUC.Modelos;
 using AWS.PUC.Repositorio;
 using System;
@@ -11,11 +12,15 @@ namespace AWS.PUC.Servicos
     {
         private readonly IGenericRepository<Torneio> _torneioRepositorio;
         private readonly IGenericRepository<TorneioPartida> _torneiosPartidasRepositorio;
+        public readonly IPartidaServico _partidaServico;
 
-        public TorneioServico(IGenericRepository<Torneio> torneioRepositorio, IGenericRepository<TorneioPartida> torneiosPartidasRepositorio)
+        public TorneioServico(IGenericRepository<Torneio> torneioRepositorio, 
+            IGenericRepository<TorneioPartida> torneiosPartidasRepositorio,
+            IPartidaServico partidaServico)
         {
             _torneioRepositorio = torneioRepositorio;
             _torneiosPartidasRepositorio = torneiosPartidasRepositorio;
+            _partidaServico = partidaServico;
         }      
 
         public async Task Cadastrar(Torneio entidade)
@@ -74,6 +79,76 @@ namespace AWS.PUC.Servicos
             torneioPartida.SetPartidaId(torneioPartidaInputDTO.PartidaId);
 
             await _torneiosPartidasRepositorio.UpdateAsync(torneioPartida);
+        }
+
+        public async Task InicarPartida(Guid idPartida)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            partida.IniciarPartida();
+
+            await _partidaServico.Editar(partida);
+        }
+
+        public async Task CadastrarGol(Guid idPartida, TipoGolEnum tipoGol)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            partida.MarcarGol(tipoGol == TipoGolEnum.GolMandante);
+
+            await _partidaServico.Editar(partida);
+        }
+
+        public async Task CadastrarIntervalo(Guid idPartida)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            if (!partida.DataInicioIntervalo.HasValue)
+            {
+                partida.IniciarIntervalo();
+            }
+            else
+            {
+                partida.EncerrarIntervalo();
+            }
+            
+            await _partidaServico.Editar(partida);
+        }
+
+        public async Task CadastrarAcrescimo(Guid idPartida, int acrescimoEmMinutos)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            partida.Acrescimo(!partida.AcrescimoEtapaInicial.HasValue, acrescimoEmMinutos);
+
+            await _partidaServico.Editar(partida);
+        }
+
+        public async Task CadastrarSubstituicao(Guid idPartida)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            partida.IncrementarSubstituicoes();
+
+            await _partidaServico.Editar(partida);
+        }
+
+        public async Task CadastrarAdvertencia(Guid idPartida)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            partida.IncrementarAdvertencia();
+
+            await _partidaServico.Editar(partida);
+        }
+
+        public async Task EncerrarPartida(Guid idPartida)
+        {
+            Partida partida = await _partidaServico.Obter(idPartida);
+
+            partida.EncerrarPartida();
+
+            await _partidaServico.Editar(partida);
         }
     }
 }

@@ -39,9 +39,9 @@ namespace AWS.PUC.Servicos
             return await _partidaRepositorio.GetAllAsync();
         }
 
-        public Task<Partida> Obter(Guid id)
+        public async Task<Partida> Obter(Guid id)
         {
-            throw new NotImplementedException();
+            return await _partidaRepositorio.FindAsync(x => x.Id == id);
         }
     }
 }

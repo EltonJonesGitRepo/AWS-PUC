@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AWS.PUC.COMUM\AWS.PUC.COMUM.csproj" />
     <ProjectReference Include="..\AWS.PUC.DTO\AWS.PUC.DTO.csproj" />
     <ProjectReference Include="..\AWS.PUC.Modelos\AWS.PUC.Modelos.csproj" />
     <ProjectReference Include="..\AWS.PUC.Repositorio\AWS.PUC.Repositorio.csproj" />

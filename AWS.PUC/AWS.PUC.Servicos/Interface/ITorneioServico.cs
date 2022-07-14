@@ -1,4 +1,5 @@
-﻿using AWS.PUC.DTO;
+﻿using AWS.PUC.COMUM.Enumeradores;
+using AWS.PUC.DTO;
 using AWS.PUC.Modelos;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,12 @@ namespace AWS.PUC.Servicos
         Task Excluir(Guid id);
         Task AssociarTorneioPartida(TorneioPartidaInputDTO torneioPartidaInputDTO);
         Task EditarAssociacaoTorneioPartida(TorneioPartidaInputDTO torneioPartidaInputDTO);
+        Task InicarPartida(Guid idPartida);
+        Task CadastrarGol(Guid idPartida, TipoGolEnum tipoGol);
+        Task CadastrarIntervalo(Guid idPartida);
+        Task CadastrarAcrescimo(Guid idPartida, int acrescimoEmMinutos);
+        Task CadastrarSubstituicao(Guid idPartida);
+        Task CadastrarAdvertencia(Guid idPartida);
+        Task EncerrarPartida(Guid idPartida);
     }
 }
