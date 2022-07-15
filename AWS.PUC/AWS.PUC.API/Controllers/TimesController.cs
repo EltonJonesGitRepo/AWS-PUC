@@ -12,7 +12,7 @@ namespace AWS.PUC.API.Controllers
     public class TimesController : ControllerBase
     {        
         private readonly ITimeServico _timeServico;
-        
+
         public TimesController(ITimeServico timeServico)
         {            
             _timeServico = timeServico;
@@ -23,8 +23,9 @@ namespace AWS.PUC.API.Controllers
         public async Task<IActionResult> Get()
         {
             try
-            {
+            {                
                 return Ok(await _timeServico.Listar());
+                
             }
             catch(Exception e)
             {

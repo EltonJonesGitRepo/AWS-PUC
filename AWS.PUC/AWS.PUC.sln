@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWS.PUC.Repositorio", "AWS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWS.PUC.DTO", "AWS.PUC.DTO\AWS.PUC.DTO.csproj", "{199CAAAB-0E4B-444A-A93C-A7E87AC9A495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWS.PUC.COMUM", "AWS.PUC.COMUM\AWS.PUC.COMUM.csproj", "{AA0320E0-11C3-4FA2-9E8D-F358B3AEA302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWS.PUC.COMUM", "AWS.PUC.COMUM\AWS.PUC.COMUM.csproj", "{AA0320E0-11C3-4FA2-9E8D-F358B3AEA302}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kafka", "kafka", "{55F7CC67-F912-4076-BCC0-43D78F8C9FBA}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Users\alene\OneDrive\Área de Trabalho\kafka.zip = ..\..\..\Users\alene\OneDrive\Área de Trabalho\kafka.zip
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

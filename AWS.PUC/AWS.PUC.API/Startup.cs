@@ -56,6 +56,7 @@ namespace AWS.PUC.API
             services.AddScoped<IPartidaServico, PartidaServico>();
             services.AddScoped<ITorneioServico, TorneioServico>();
             services.AddScoped<IJogadorServico, JogadorServico>();
+            services.AddScoped<IKafkaServico, KafkaServico>();
             services.AddScoped<ITransferenciaServico, TransferenciaServico>();
             
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

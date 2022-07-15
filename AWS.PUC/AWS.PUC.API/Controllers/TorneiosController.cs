@@ -4,8 +4,6 @@ using AWS.PUC.Modelos;
 using AWS.PUC.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AWS.PUC.API.Controllers
@@ -14,10 +12,12 @@ namespace AWS.PUC.API.Controllers
     public class TorneiosController : ControllerBase
     {
         private readonly ITorneioServico _torneioServico;
+        private readonly IKafkaServico _kafkaServico;
 
-        public TorneiosController(ITorneioServico torneioServico)
+        public TorneiosController(ITorneioServico torneioServico, IKafkaServico kafkaServico)
         {
             _torneioServico = torneioServico;
+            _kafkaServico = kafkaServico;
         }
 
         [HttpGet]
@@ -138,6 +138,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.InicarPartida(idPartida);
+                _kafkaServico.Enviar("APIITA O ARBITRO! Bola rolando..");
                 return Ok();
             }
             catch (Exception e)
@@ -154,6 +155,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.CadastrarGol(idPartida, tipoGol);
+                _kafkaServico.Enviar("GOOOOOL!");
                 return Ok();
             }
             catch (Exception e)
@@ -170,6 +172,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.CadastrarIntervalo(idPartida);
+                _kafkaServico.Enviar("APIITA O ARBITRO! Intervalo..");
                 return Ok();
             }
             catch (Exception e)
@@ -185,6 +188,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.CadastrarAcrescimo(idPartida, acrescimoEmMinutos);
+                _kafkaServico.Enviar("Teremos acréscimo de " + acrescimoEmMinutos.ToString());
                 return Ok();
             }
             catch (Exception e)
@@ -200,6 +204,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.CadastrarSubstituicao(idPartida);
+                _kafkaServico.Enviar("Substituição realizada.");
                 return Ok();
             }
             catch (Exception e)
@@ -215,6 +220,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.CadastrarAdvertencia(idPartida);
+                _kafkaServico.Enviar("Advertência registrada.");
                 return Ok();
             }
             catch (Exception e)
@@ -230,6 +236,7 @@ namespace AWS.PUC.API.Controllers
             try
             {
                 await _torneioServico.EncerrarPartida(idPartida);
+                _kafkaServico.Enviar("APIIIITA O ARBITRO! Fim da partida.");
                 return Ok();
             }
             catch (Exception e)
